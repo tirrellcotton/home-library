@@ -1,0 +1,6 @@
+# Ignore all .css files in wwwroot/css
+wwwroot/css/*.css
+wwwroot/css/minified/*.css
+
+# Ignore all files in wwwroot/lib
+wwwroot/lib/**
