@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using HomeLibrary.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using HomeLibrary.Web.Mvc.Models;
 
@@ -7,14 +8,17 @@ namespace HomeLibrary.Web.Mvc.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IGenreManager _genreManager;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IGenreManager genreManager)
     {
         _logger = logger;
+        _genreManager = genreManager;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
+        var genres = await _genreManager.GetGenresAsync();
         return View();
     }
 
