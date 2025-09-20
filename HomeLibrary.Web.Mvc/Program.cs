@@ -1,3 +1,5 @@
+using HomeLibrary.BusinessLogic.Managers;
+using HomeLibrary.Core.Interfaces;
 using HomeLibrary.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +17,10 @@ builder.Configuration.AddConfiguration(configuration);
 
 // Add DB Contexts
 builder.Services.AddDbContext<HomeLibrarySqlContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("HomeLibrarySqlConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("HomeLibrarySql")));
+
+// Add Transient Services
+builder.Services.AddTransient<IGenreManager,GenreManager>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
