@@ -1,4 +1,21 @@
+using HomeLibrary.DataAccess.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false, true)
+    .AddJsonFile($"appsettings.{env}.json", true, true)
+    .AddEnvironmentVariables()
+    .Build();
+
+builder.Configuration.AddConfiguration(configuration);
+
+// Add DB Contexts
+builder.Services.AddDbContext<HomeLibrarySqlContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("HomeLibrarySqlConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
