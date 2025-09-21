@@ -17,7 +17,7 @@ public class GenreManager(HomeLibrarySqlContext context) : IGenreManager
         }).ToListAsync();
     }
 
-    public GenreDto? GetGenreByIdAsync(int id)
+    public GenreDto? GetGenreById(int id)
     {
         return context.Genres.Where(g => g.Id == id)
             .AsNoTracking()

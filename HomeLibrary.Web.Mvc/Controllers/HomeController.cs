@@ -5,20 +5,16 @@ using HomeLibrary.Web.Mvc.Models;
 
 namespace HomeLibrary.Web.Mvc.Controllers;
 
-public class HomeController : Controller
+public class HomeController(ILogger<HomeController> logger, 
+    IGenreManager genreManager,
+    IAuthorManager authorManager) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly IGenreManager _genreManager;
-
-    public HomeController(ILogger<HomeController> logger, IGenreManager genreManager)
-    {
-        _logger = logger;
-        _genreManager = genreManager;
-    }
+    private readonly ILogger<HomeController> _logger = logger;
 
     public async Task<IActionResult> Index()
     {
-        var genres = await _genreManager.GetGenresAsync();
+        var genres = await genreManager.GetGenresAsync();
+        var authors = await authorManager.GetAuthorsAsync();
         return View();
     }
 
