@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLibrary.BusinessLogic",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLibrary.Web.Mvc", "HomeLibrary.Web.Mvc\HomeLibrary.Web.Mvc.csproj", "{9F2D9CDE-138B-4182-8020-69B84B5BB2CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLibrary.BusinessLogic.Tests", "HomeLibrary.BusinessLogic.Tests\HomeLibrary.BusinessLogic.Tests.csproj", "{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{9F2D9CDE-138B-4182-8020-69B84B5BB2CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F2D9CDE-138B-4182-8020-69B84B5BB2CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F2D9CDE-138B-4182-8020-69B84B5BB2CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
