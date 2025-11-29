@@ -1,0 +1,114 @@
+@model HomeLibrary.Web.Mvc.Models.LibraryViewModel
+@{
+    ViewData["Title"] = "My Library";
+}
+
+<div class="container">
+    <section class="library-filters">
+        <form method="get" asp-controller="Library" asp-action="Index" class="filter-form">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <button type="button" class="search-bar__icon" aria-label="Search">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input 
+                    type="text" 
+                    name="searchTerm" 
+                    value="@Model.SearchTerm" 
+                    placeholder="Search Books" 
+                    class="search-bar__input"
+                    aria-label="Search books by title" />
+                <button type="button" class="search-bar__voice-icon" aria-label="Voice search">
+                    <i class="bi bi-mic-fill"></i>
+                </button>
+            </div>
+
+            <!-- Genre Filter -->
+            <div class="filter-dropdown">
+                <select name="genreId" class="filter-dropdown__select" aria-label="Filter by genre">
+                    <option value="">All Genres</option>
+                    @foreach (var genre in Model.Genres)
+                    {
+                        <option value="@genre.Id" selected="@(Model.SelectedGenreId == genre.Id)">
+                            @genre.Name
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <!-- Author Filter -->
+            <div class="filter-dropdown">
+                <select name="authorId" class="filter-dropdown__select" aria-label="Filter by author">
+                    <option value="">All Authors</option>
+                    @foreach (var author in Model.Authors)
+                    {
+                        <option value="@author.Id" selected="@(Model.SelectedAuthorId == author.Id)">
+                            @author.Name
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <!-- Hidden submit button for accessibility -->
+            <button type="submit" class="hidden" aria-label="Apply filters">Apply</button>
+        </form>
+    </section>
+
+    <!-- Book Grid -->
+    <section class="book-grid">
+        @if (Model.Books.Any())
+        {
+            @foreach (var book in Model.Books)
+            {
+                <div class="book-card">
+                    <div class="book-card__image">
+                        @if (!string.IsNullOrEmpty(book.CoverImageUrl))
+                        {
+                            <img src="@book.CoverImageUrl" alt="@book.Title cover" class="book-card__cover" />
+                        }
+                        else
+                        {
+                            <div class="book-card__placeholder">
+                                <i class="bi bi-book book-card__placeholder-icon"></i>
+                            </div>
+                        }
+                    </div>
+                    <div class="book-card__info">
+                        <h3 class="book-card__title">@book.Title</h3>
+                        @if (!string.IsNullOrEmpty(book.Author))
+                        {
+                            <p class="book-card__author">
+                                <i class="bi bi-person"></i>
+                                <span>@book.Author</span>
+                            </p>
+                        }
+                        <p class="book-card__genre">
+                            <i class="bi bi-tag"></i>
+                            <span>@book.Genre</span>
+                        </p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-state">
+                <i class="bi bi-inbox empty-state__icon"></i>
+                <p class="empty-state__message">No books found in your library.</p>
+                <p class="empty-state__hint">Try adjusting your filters or add some books!</p>
+            </div>
+        }
+    </section>
+
+    <!-- Add Book Button -->
+    <section class="library-actions">
+        <a href="#" class="btn btn-primary btn-add-book">
+            <i class="bi bi-plus-circle"></i>
+            <span>Add Book to Library</span>
+        </a>
+    </section>
+</div>
+
+@section Scripts {
+    <script type="module" src="~/js/library.js" asp-append-version="true"></script>
+}

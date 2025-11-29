@@ -33,7 +33,8 @@ HomeLibrary/
 ### Frontend
 - **TypeScript 5.3.3** - For type-safe JavaScript
 - **ES2020** - Target JavaScript version
-- **Custom CSS** - Mobile-first, no Bootstrap dependency
+- **Custom CSS** - Mobile-first, no Bootstrap framework dependency
+- **Bootstrap Icons 1.11.3** - Icon library (CDN)
 - **Axios** - For REST API calls (future use)
 - **No JavaScript frameworks** - Vanilla TypeScript/JavaScript only
 
@@ -246,6 +247,82 @@ builder.Services.AddTransient<IGenreManager, GenreManager>();
 
 ## Frontend Guidelines
 
+### Icons - Bootstrap Icons
+
+**Always use Bootstrap Icons** for all iconography throughout the application.
+
+**CDN Integration**:
+```html
+<!-- Include in _Layout.cshtml <head> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+```
+
+**Usage in Razor Views**:
+```html
+<!-- Basic icon -->
+<i class="bi bi-book-fill"></i>
+
+<!-- Icon with text -->
+<button class="btn">
+    <i class="bi bi-plus-circle"></i>
+    <span>Add Book</span>
+</button>
+
+<!-- Icon in link -->
+<a href="#" class="menu-link">
+    <i class="bi bi-heart"></i>
+    <span>My Wishlist</span>
+</a>
+```
+
+**Standard Icons Used**:
+- **Navigation**: `bi-list` (menu), `bi-x-lg` (close), `bi-three-dots-vertical` (more options)
+- **Library**: `bi-book-fill`, `bi-book`, `bi-journal-bookmark`
+- **Actions**: `bi-plus-circle` (add), `bi-heart` (wishlist), `bi-heart-fill` (filled heart)
+- **Search**: `bi-search`, `bi-mic-fill` (voice search)
+- **Settings**: `bi-gear`
+- **User**: `bi-person`
+- **Tags**: `bi-tag`
+- **Empty State**: `bi-inbox`
+
+**CSS Styling for Icons**:
+```css
+/* Icon sizing */
+.app-header__logo {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* Icon with text (flex layout) */
+.btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.btn i {
+    font-size: 1.25rem;
+}
+
+/* Icon colors */
+.menu-link i {
+    color: var(--primary-color);
+}
+
+/* Icon hover effects */
+.icon-btn:hover i {
+    color: var(--primary-hover);
+}
+```
+
+**Icon Guidelines**:
+- Use semantic icon choices that match functionality
+- Maintain consistent sizing within contexts (header icons, button icons, card icons)
+- Always pair icons with text for accessibility (use `<span>` for text)
+- Apply `aria-label` to icon-only buttons
+- Use filled variants (`-fill`) for active/selected states
+- Color icons using CSS variables for theme consistency
+
 ### CSS Architecture
 
 **Mobile-First Approach**: Always design for mobile first, then add responsive breakpoints.
@@ -419,17 +496,19 @@ public record BookStatuses(int Id, string Name)
 - **Typography**: System font stack for fast loading
 - **Colors**: Primary blue (`#4A90E2`), neutral grays
 - **Spacing**: Consistent spacing scale (xs, sm, md, lg, xl)
+- **Icons**: Bootstrap Icons for all iconography
 
 ### Navigation
-- Hamburger menu (?) for mobile navigation
+- Hamburger menu (`bi-list`) for mobile navigation
 - Side drawer menu with overlay
-- Dropdown menu for contextual actions (?)
+- Dropdown menu for contextual actions (`bi-three-dots-vertical`)
 - Sticky header for easy access
 
 ### Components
-- Action buttons (full-width on mobile, max-width on desktop)
-- Stat cards (stacked on mobile, grid on tablet+)
+- Action buttons (full-width on mobile, max-width on desktop) with icons
+- Stat cards (stacked on mobile, grid on tablet+) with icon indicators
 - Form inputs with mobile-friendly sizes
+- Search bars with icon buttons
 - Loading states and error handling
 
 ## Common Patterns
@@ -488,10 +567,38 @@ public record BookStatuses(int Id, string Name)
 
 1. **Create View Model** in `HomeLibrary.Web.Mvc/Models/`
 2. **Create Controller Action** that returns view with model
-3. **Create Razor View** in appropriate `Views/` folder
+3. **Create Razor View** in appropriate `Views/` folder with Bootstrap Icons
 4. **Add CSS** using component naming in `site.css`
 5. **Add TypeScript** for interactions in `wwwroot/ts/`
 6. **Compile TypeScript** to `wwwroot/js/`
+
+### Adding Icons to a View
+
+```html
+<!-- Button with icon -->
+<button class="btn btn-primary">
+    <i class="bi bi-plus-circle"></i>
+    <span>Add New Item</span>
+</button>
+
+<!-- Navigation link with icon -->
+<a href="#" class="nav-link">
+    <i class="bi bi-book-fill"></i>
+    <span>My Library</span>
+</a>
+
+<!-- Icon-only button (with aria-label) -->
+<button class="icon-btn" aria-label="Close menu">
+    <i class="bi bi-x-lg"></i>
+</button>
+
+<!-- Card with icon indicator -->
+<div class="stat-card">
+    <i class="bi bi-heart-fill stat-card__icon"></i>
+    <div class="stat-card__label">Total Wishlist</div>
+    <div class="stat-card__value">20</div>
+</div>
+```
 
 ## Error Handling
 
@@ -537,6 +644,7 @@ private async fetchData(): Promise<void> {
 4. **Lazy loading disabled** - use explicit includes when needed
 5. **Connection string pooling** enabled by default
 6. **Minimize JavaScript bundle size** - use ES2020 modules
+7. **CDN for icons** - Bootstrap Icons loaded via CDN for caching
 
 ## Security Considerations
 
@@ -566,9 +674,11 @@ private async fetchData(): Promise<void> {
 8. **Component thinking** - Create reusable CSS components
 9. **DI registration** - Register new services in Program.cs
 10. **Build verification** - Ensure solution builds after changes
+11. **Bootstrap Icons** - Use for all icons, not emojis or text symbols
 
 ### Don't:
-- ? Use Bootstrap or other CSS frameworks
+- ? Use Bootstrap CSS framework (conflicts with custom CSS)
+- ? Use emojis or text symbols for icons (use Bootstrap Icons)
 - ? Add JavaScript frameworks (React, Angular, Vue)
 - ? Mix Razor Pages with MVC
 - ? Put business logic in controllers
@@ -590,6 +700,12 @@ private async fetchData(): Promise<void> {
 - **CSS**: `HomeLibrary.Web.Mvc/wwwroot/css/site.css`
 - **TypeScript**: `HomeLibrary.Web.Mvc/wwwroot/ts/`
 - **JavaScript**: `HomeLibrary.Web.Mvc/wwwroot/js/` (compiled)
+
+### Bootstrap Icons Reference
+- **Documentation**: https://icons.getbootstrap.com/
+- **CDN**: `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css`
+- **Usage**: `<i class="bi bi-{icon-name}"></i>`
+- **Search**: Browse at https://icons.getbootstrap.com/ for appropriate icons
 
 ### Common Commands
 ```bash
@@ -622,6 +738,8 @@ npm run watch
 6. **Am I using CSS variables?** (For consistency)
 7. **Is TypeScript being used instead of JavaScript?** (Always TypeScript)
 8. **Did I register in DI?** (New services need registration)
+9. **Am I using Bootstrap Icons?** (Use for all icons, not emojis)
+10. **Is the icon semantic?** (Does it clearly represent the action/content?)
 
 ---
 
