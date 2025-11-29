@@ -7,15 +7,20 @@ namespace HomeLibrary.Web.Mvc.Controllers;
 
 public class HomeController(ILogger<HomeController> logger, 
     IGenreManager genreManager,
-    IAuthorManager authorManager) : Controller
+    IAuthorManager authorManager,
+    IBookManager bookManager) : Controller
 {
     private readonly ILogger<HomeController> _logger = logger;
 
     public async Task<IActionResult> Index()
     {
-        var genres = await genreManager.GetGenresAsync();
-        var authors = await authorManager.GetAuthorsAsync();
-        return View();
+        var viewModel = new HomeViewModel
+        {
+            TotalBooksOwned = await bookManager.GetOwnedBookCountAsync(),
+            TotalWishlist = await bookManager.GetWishlistBookCountAsync()
+        };
+        
+        return View(viewModel);
     }
 
     public IActionResult Privacy()

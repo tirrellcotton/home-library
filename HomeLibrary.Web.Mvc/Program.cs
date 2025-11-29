@@ -22,6 +22,7 @@ builder.Services.AddDbContext<HomeLibrarySqlContext>(options =>
 // Add Transient Services
 builder.Services.AddTransient<IGenreManager,GenreManager>();
 builder.Services.AddTransient<IAuthorManager,AuthorManager>();
+builder.Services.AddTransient<IBookManager,BookManager>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

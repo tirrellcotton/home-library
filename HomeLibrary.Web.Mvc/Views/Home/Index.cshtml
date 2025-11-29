@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model HomeLibrary.Web.Mvc.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <section class="dashboard-actions">
+        <a href="#" class="btn btn-primary">My Library</a>
+        <a href="#" class="btn btn-primary">My Wishlist</a>
+        <a href="#" class="btn btn-primary">Add Book</a>
+    </section>
+
+    <section class="dashboard-stats">
+        <div class="stat-card">
+            <div class="stat-card__label">Total Books Owned</div>
+            <div class="stat-card__value">@Model.TotalBooksOwned</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card__label">Total Wishlist</div>
+            <div class="stat-card__value">@Model.TotalWishlist</div>
+        </div>
+    </section>
 </div>
