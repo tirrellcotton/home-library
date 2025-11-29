@@ -1,5 +1,7 @@
-﻿using HomeLibrary.Core.Interfaces;
+﻿using HomeLibrary.Core.DataTransferObjects;
+using HomeLibrary.Core.Interfaces;
 using HomeLibrary.Core.Records;
+using HomeLibrary.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeLibrary.BusinessLogic.Managers;
@@ -46,6 +48,34 @@ public class BookManager(HomeLibrarySqlContext context) : IBookManager
         if (authorId.HasValue && authorId.Value > 0)
         {
             query = query.Where(b => b.AuthorId == authorId.Value);
+        }
+
+        return await query
+            .OrderBy(b => b.Title)
+            .Select(b => new BookDto
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Author = b.Author != null ? b.Author.Name : null,
+                Genre = b.Genre.Name,
+                CoverImageUrl = b.CoverImageUrl,
+                PublishedYear = b.PublishedYear
+            })
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<BookDto>> GetWishlistBooksAsync(string? searchTerm = null)
+    {
+        var query = context.Books
+            .AsNoTracking()
+            .Include(b => b.Author)
+            .Include(b => b.Genre)
+            .Where(b => b.BookStatusId == BookStatuses.Wishlist.Id);
+
+        // Apply search filter
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            query = query.Where(b => b.Title.Contains(searchTerm));
         }
 
         return await query
