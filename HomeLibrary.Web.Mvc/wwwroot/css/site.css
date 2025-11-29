@@ -22,5 +22,8 @@
 /* 7. Forms - Search bars, filters, and form inputs */
 @import url('forms.css');
 
-/* 8. Utilities - Helper classes */
+/* 8. Modal - Modal dialogs and overlays */
+@import url('modal.css');
+
+/* 9. Utilities - Helper classes */
 @import url('utilities.css');

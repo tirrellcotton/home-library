@@ -3,21 +3,27 @@
  * Handles search and interactions for the My Wishlist page
  */
 
+import { BookModal } from './bookmodal.js';
+
 interface WishlistElements {
     searchInput: HTMLInputElement | null;
     filterForm: HTMLFormElement | null;
+    bookCards: NodeListOf<HTMLElement>;
 }
 
 class Wishlist {
     private elements: WishlistElements;
     private debounceTimer: number | null = null;
+    private bookModal: BookModal;
 
     constructor() {
         this.elements = {
             searchInput: document.querySelector('.search-bar__input'),
-            filterForm: document.querySelector('.filter-form')
+            filterForm: document.querySelector('.filter-form'),
+            bookCards: document.querySelectorAll('.book-card')
         };
 
+        this.bookModal = new BookModal();
         this.init();
     }
 
@@ -31,6 +37,11 @@ class Wishlist {
 
         // Prevent default form submission
         this.elements.filterForm?.addEventListener('submit', (e) => this.handleFormSubmit(e));
+
+        // Book card clicks to open modal
+        this.elements.bookCards.forEach(card => {
+            card.addEventListener('click', (e) => this.handleBookCardClick(e, card));
+        });
     }
 
     private handleSearchInput(): void {
@@ -53,6 +64,15 @@ class Wishlist {
     private submitForm(): void {
         if (this.elements.filterForm) {
             this.elements.filterForm.submit();
+        }
+    }
+
+    private handleBookCardClick(e: Event, card: HTMLElement): void {
+        const bookId = card.getAttribute('data-book-id');
+        
+        if (bookId) {
+            const bookIdNum = parseInt(bookId, 10);
+            this.bookModal.open(bookIdNum);
         }
     }
 }

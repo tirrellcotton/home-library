@@ -39,7 +39,7 @@
         {
             @foreach (var book in Model.Books)
             {
-                <div class="book-card">
+                <div class="book-card" data-book-id="@book.Id">
                     <div class="book-card__image">
                         @if (!string.IsNullOrEmpty(book.CoverImageUrl))
                         {
@@ -67,7 +67,7 @@
                         </p>
                     </div>
                     <div class="book-card__actions">
-                        <a asp-controller="AddBook" asp-action="Edit" asp-route-id="@book.Id" class="book-card__edit-btn" title="Edit book">
+                        <a asp-controller="AddBook" asp-action="Edit" asp-route-id="@book.Id" class="book-card__edit-btn" title="Edit book" onclick="event.stopPropagation();">
                             <i class="bi bi-pencil"></i>
                         </a>
                     </div>
@@ -92,6 +92,9 @@
         </a>
     </section>
 </div>
+
+<!-- Book Details Modal -->
+<partial name="_BookDetailsModal" />
 
 @section Scripts {
     <script type="module" src="~/js/wishlist.js" asp-append-version="true"></script>

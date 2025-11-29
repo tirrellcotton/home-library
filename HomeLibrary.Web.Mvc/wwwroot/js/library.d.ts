@@ -5,12 +5,13 @@
 declare class Library {
     private elements;
     private debounceTimer;
+    private bookModal;
     constructor();
     private init;
     private attachEventListeners;
     private handleSearchInput;
     private handleFormSubmit;
     private submitForm;
-    private handleVoiceSearch;
+    private handleBookCardClick;
 }
 export { Library };
