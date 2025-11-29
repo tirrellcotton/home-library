@@ -1,0 +1,61 @@
+/**
+ * Library Module
+ * Handles search, filtering, and interactions for the My Library page
+ */
+class Library {
+    constructor() {
+        this.debounceTimer = null;
+        this.elements = {
+            searchInput: document.querySelector('.search-bar__input'),
+            genreSelect: document.querySelector('select[name="genreId"]'),
+            authorSelect: document.querySelector('select[name="authorId"]'),
+            filterForm: document.querySelector('.filter-form')
+        };
+        this.init();
+    }
+    init() {
+        this.attachEventListeners();
+    }
+    attachEventListeners() {
+        // Auto-submit on search input with debounce
+        this.elements.searchInput?.addEventListener('input', () => this.handleSearchInput());
+        // Auto-submit on filter change
+        this.elements.genreSelect?.addEventListener('change', () => this.submitForm());
+        this.elements.authorSelect?.addEventListener('change', () => this.submitForm());
+        // Prevent default form submission
+        this.elements.filterForm?.addEventListener('submit', (e) => this.handleFormSubmit(e));
+    }
+    handleSearchInput() {
+        // Clear existing timer
+        if (this.debounceTimer) {
+            window.clearTimeout(this.debounceTimer);
+        }
+        // Set new timer to submit after 500ms of no typing
+        this.debounceTimer = window.setTimeout(() => {
+            this.submitForm();
+        }, 500);
+    }
+    handleFormSubmit(e) {
+        e.preventDefault();
+        this.submitForm();
+    }
+    submitForm() {
+        if (this.elements.filterForm) {
+            this.elements.filterForm.submit();
+        }
+    }
+    // Future enhancement: Voice search functionality
+    handleVoiceSearch() {
+        // Implementation for voice search can be added here
+        console.log('Voice search not yet implemented');
+    }
+}
+// Initialize library when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new Library());
+}
+else {
+    new Library();
+}
+export { Library };
+//# sourceMappingURL=library.js.map
