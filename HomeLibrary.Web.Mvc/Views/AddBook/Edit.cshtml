@@ -1,0 +1,146 @@
+@model HomeLibrary.Web.Mvc.Models.EditBookViewModel
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<div class="container">
+    <!-- Page Title -->
+    <section class="page-header">
+        <h1 class="page-header__title">Edit Book</h1>
+    </section>
+
+    <!-- Success Message -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <!-- Edit Book Form -->
+    <form asp-action="Edit" method="post" class="add-book-form">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+        <!-- Title -->
+        <div class="form-group">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-input" placeholder="Enter book title" />
+            <span asp-validation-for="Title" class="form-error"></span>
+        </div>
+
+        <!-- Author -->
+        <div class="form-group">
+            <label asp-for="AuthorId" class="form-label">Author</label>
+            <select asp-for="AuthorId" class="form-select">
+                <option value="">Select Author</option>
+                @foreach (var author in Model.Authors)
+                {
+                    <option value="@author.Id">@author.Name</option>
+                }
+            </select>
+            <span asp-validation-for="AuthorId" class="form-error"></span>
+        </div>
+
+        <!-- Genre -->
+        <div class="form-group">
+            <label asp-for="GenreId" class="form-label">Genre</label>
+            <select asp-for="GenreId" class="form-select" required>
+                <option value="">Select Genre</option>
+                @foreach (var genre in Model.Genres)
+                {
+                    <option value="@genre.Id">@genre.Name</option>
+                }
+            </select>
+            <span asp-validation-for="GenreId" class="form-error"></span>
+        </div>
+
+        <!-- ISBN -->
+        <div class="form-group">
+            <label asp-for="Isbn" class="form-label">ISBN</label>
+            <input asp-for="Isbn" class="form-input" placeholder="Enter ISBN" />
+            <span asp-validation-for="Isbn" class="form-error"></span>
+        </div>
+
+        <!-- Publisher -->
+        <div class="form-group">
+            <label asp-for="PublisherId" class="form-label">Publisher</label>
+            <select asp-for="PublisherId" class="form-select">
+                <option value="">Select Publisher</option>
+                @foreach (var publisher in Model.Publishers)
+                {
+                    <option value="@publisher.Id">@publisher.Name</option>
+                }
+            </select>
+            <span asp-validation-for="PublisherId" class="form-error"></span>
+        </div>
+
+        <!-- Published Year -->
+        <div class="form-group form-group--short">
+            <label asp-for="PublishedYear" class="form-label">Published Year</label>
+            <input asp-for="PublishedYear" type="number" class="form-input" placeholder="2025" min="1000" max="9999" />
+            <span asp-validation-for="PublishedYear" class="form-error"></span>
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+            <label asp-for="BookStatusId" class="form-label">Status</label>
+            <select asp-for="BookStatusId" class="form-select" required>
+                <option value="1">Owned</option>
+                <option value="2">Wishlist</option>
+                <option value="3">Read</option>
+            </select>
+            <span asp-validation-for="BookStatusId" class="form-error"></span>
+        </div>
+
+        <!-- Cover Image URL -->
+        <div class="form-group">
+            <label asp-for="CoverImageUrl" class="form-label">Cover Image URL</label>
+            <textarea asp-for="CoverImageUrl" class="form-textarea form-textarea--medium" rows="3" placeholder="https://example.com/cover.jpg"></textarea>
+            <span asp-validation-for="CoverImageUrl" class="form-error"></span>
+        </div>
+
+        <!-- Cover Image Preview -->
+        <div class="cover-preview">
+            @if (!string.IsNullOrEmpty(Model.CoverImageUrl))
+            {
+                <div class="cover-preview__image" id="coverPreview">
+                    <img src="@Model.CoverImageUrl" alt="Book cover preview" />
+                </div>
+            }
+            else
+            {
+                <div class="cover-preview__placeholder" id="coverPreview">
+                    <i class="bi bi-image"></i>
+                    <p>Cover Preview</p>
+                </div>
+            }
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group">
+            <label asp-for="Notes" class="form-label">Notes</label>
+            <textarea asp-for="Notes" class="form-textarea" rows="4" placeholder="Add any notes about this book..."></textarea>
+            <span asp-validation-for="Notes" class="form-error"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-save">
+                <i class="bi bi-check-circle"></i>
+                <span>Update Book</span>
+            </button>
+            <a asp-controller="Library" asp-action="Index" class="btn btn-secondary btn-cancel">
+                <i class="bi bi-x-circle"></i>
+                <span>Cancel</span>
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="module" src="~/js/addbook.js" asp-append-version="true"></script>
+}

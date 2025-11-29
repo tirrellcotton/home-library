@@ -87,6 +87,11 @@
                             <span>@book.Genre</span>
                         </p>
                     </div>
+                    <div class="book-card__actions">
+                        <a asp-controller="AddBook" asp-action="Edit" asp-route-id="@book.Id" class="book-card__edit-btn" title="Edit book">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                    </div>
                 </div>
             }
         }
@@ -102,7 +107,7 @@
 
     <!-- Add Book Button -->
     <section class="library-actions">
-        <a href="#" class="btn btn-primary btn-add-book">
+        <a asp-controller="AddBook" asp-action="Index" class="btn btn-primary btn-add-book">
             <i class="bi bi-plus-circle"></i>
             <span>Add Book to Library</span>
         </a>

@@ -1,5 +1,6 @@
 ﻿using HomeLibrary.Core.DataTransferObjects;
 using HomeLibrary.Core.Interfaces;
+using HomeLibrary.Core.Models;
 using HomeLibrary.Core.Records;
 using HomeLibrary.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -90,5 +91,28 @@ public class BookManager(HomeLibrarySqlContext context) : IBookManager
                 PublishedYear = b.PublishedYear
             })
             .ToListAsync();
+    }
+
+    public async Task<int> AddBookAsync(Book book)
+    {
+        context.Books.Add(book);
+        await context.SaveChangesAsync();
+        return book.Id;
+    }
+
+    public async Task<Book?> GetBookByIdAsync(int id)
+    {
+        return await context.Books
+            .Include(b => b.Author)
+            .Include(b => b.Genre)
+            .Include(b => b.Publisher)
+            .Include(b => b.BookStatus)
+            .FirstOrDefaultAsync(b => b.Id == id);
+    }
+
+    public async Task UpdateBookAsync(Book book)
+    {
+        context.Books.Update(book);
+        await context.SaveChangesAsync();
     }
 }

@@ -49,11 +49,16 @@
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
+  position: relative;
 }
 
 .book-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
+}
+
+.book-card:hover .book-card__actions {
+  opacity: 1;
 }
 
 .book-card__image {
@@ -132,6 +137,39 @@
 
 .book-card__genre i {
   flex-shrink: 0;
+}
+
+.book-card__actions {
+  position: absolute;
+  top: var(--spacing-xs);
+  right: var(--spacing-xs);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.book-card__edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: var(--card-background);
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  color: var(--primary-color);
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s ease;
+}
+
+.book-card__edit-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.book-card__edit-btn i {
+  font-size: 1rem;
 }
 
 /* Empty State Component */
