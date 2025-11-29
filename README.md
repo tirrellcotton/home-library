@@ -1,42 +1,42 @@
-# ?? Home Library
+# Home Library
 
 A modern web application for managing your personal book collection and wishlist. Built with ASP.NET Core MVC and TypeScript, Home Library helps you catalog books you own and track titles you'd like to acquire.
 
-![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)
-![TypeScript](https://img.shields.io/badge/TypeScript-ES2020-3178C6?logo=typescript)
-![SQL Server](https://img.shields.io/badge/SQL_Server-Database-CC2927?logo=microsoftsqlserver)
+![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4logo=dotnet)
+![TypeScript](https://img.shields.io/badge/TypeScript-ES2020-3178C6logo=typescript)
+![SQL Server](https://img.shields.io/badge/SQL_Server-Database-CC2927logo=microsoftsqlserver)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## ? Features
+##  Features
 
-- **?? Library Management**: Track all books you own with detailed information
-- **?? Wishlist**: Maintain a list of books you want to read or purchase
-- **?? Search & Filter**: Quickly find books by title, author, genre, or other criteria
-- **? Add/Edit Books**: Easy-to-use forms for managing your collection
-- **?? Dashboard**: Overview of your library statistics
-- **?? Responsive Design**: Works seamlessly on desktop and mobile devices
-- **?? Modern UI**: Clean, intuitive interface with Bootstrap Icons
+- ** Library Management**: Track all books you own with detailed information
+- ** Wishlist**: Maintain a list of books you want to read or purchase
+- ** Search & Filter**: Quickly find books by title, author, genre, or other criteria
+- ** Add/Edit Books**: Easy-to-use forms for managing your collection
+- ** Dashboard**: Overview of your library statistics
+- ** Responsive Design**: Works seamlessly on desktop and mobile devices
+- ** Modern UI**: Clean, intuitive interface with Bootstrap Icons
 
-## ??? Architecture
+##  Architecture
 
 The application follows a clean, layered architecture:
 
 ```
 HomeLibrary/
-??? HomeLibrary.Web.Mvc/          # ASP.NET Core MVC Web Layer
-?   ??? Controllers/              # MVC Controllers
-?   ??? Views/                    # Razor Views
-?   ??? Models/                   # View Models
-?   ??? wwwroot/                  # Static assets (CSS, JS, TypeScript)
-??? HomeLibrary.BusinessLogic/    # Business Logic Layer
-?   ??? Managers/                 # Business logic managers
-??? HomeLibrary.Core/             # Core Domain Layer
-?   ??? Models/                   # Domain entities
-?   ??? DataTransferObjects/      # DTOs
-?   ??? Interfaces/               # Service interfaces
-??? HomeLibrary.DataAccess/       # Data Access Layer
-?   ??? Contexts/                 # Entity Framework DbContext
-??? HomeLibrary.BusinessLogic.Tests/  # Unit Tests
+ HomeLibrary.Web.Mvc/          # ASP.NET Core MVC Web Layer
+    Controllers/              # MVC Controllers
+    Views/                    # Razor Views
+    Models/                   # View Models
+    wwwroot/                  # Static assets (CSS, JS, TypeScript)
+ HomeLibrary.BusinessLogic/    # Business Logic Layer
+    Managers/                 # Business logic managers
+ HomeLibrary.Core/             # Core Domain Layer
+    Models/                   # Domain entities
+    DataTransferObjects/      # DTOs
+    Interfaces/               # Service interfaces
+ HomeLibrary.DataAccess/       # Data Access Layer
+    Contexts/                 # Entity Framework DbContext
+ HomeLibrary.BusinessLogic.Tests/  # Unit Tests
 ```
 
 ### Key Components
@@ -45,7 +45,7 @@ HomeLibrary/
 - **Managers**: BookManager, AuthorManager, GenreManager, PublisherManager
 - **Database Entities**: Book, Author, Genre, Publisher, BookStatus
 
-## ?? Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -94,7 +94,7 @@ HomeLibrary/
    
    Open your browser and navigate to: `https://localhost:5001` (or the port shown in the console)
 
-## ??? Database Schema
+##  Database Schema
 
 The application uses Entity Framework Core with the following main entities:
 
@@ -104,7 +104,7 @@ The application uses Entity Framework Core with the following main entities:
 - **Publishers**: Publishing companies
 - **BookStatus**: Status indicators (Owned, Wishlist, etc.)
 
-## ?? Frontend Technologies
+##  Frontend Technologies
 
 - **TypeScript**: Type-safe JavaScript for enhanced development
 - **ES2020 Modules**: Modern JavaScript module system
@@ -119,7 +119,7 @@ The application uses Entity Framework Core with the following main entities:
 - `addbook.ts`: Add/edit book form handling
 - `dashboard.ts`: Navigation and menu interactions
 
-## ?? Testing
+##  Testing
 
 Run the unit tests:
 
@@ -127,7 +127,7 @@ Run the unit tests:
 dotnet test HomeLibrary.BusinessLogic.Tests
 ```
 
-## ??? Development
+##  Development
 
 ### Building TypeScript
 
@@ -146,7 +146,7 @@ tsc --watch  # Watch mode for development
 - **HomeLibrary.DataAccess**: Entity Framework context and database access
 - **HomeLibrary.BusinessLogic.Tests**: Unit tests
 
-## ?? Configuration
+##  Configuration
 
 ### Environment Variables
 
@@ -158,12 +158,12 @@ The application supports environment-specific configuration:
 ### Dependency Injection
 
 Services are registered in `Program.cs`:
-- `IBookManager` ? `BookManager`
-- `IAuthorManager` ? `AuthorManager`
-- `IGenreManager` ? `GenreManager`
-- `IPublisherManager` ? `PublisherManager`
+- `IBookManager`  `BookManager`
+- `IAuthorManager`  `AuthorManager`
+- `IGenreManager`  `GenreManager`
+- `IPublisherManager`  `PublisherManager`
 
-## ?? Contributing
+##  Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -173,16 +173,16 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## ?? License
+##  License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## ?? Author
+##  Author
 
 **Tirrell Cotton**
 - GitHub: [@tirrellcotton](https://github.com/tirrellcotton)
 
-## ?? Acknowledgments
+##  Acknowledgments
 
 - Built with [ASP.NET Core](https://docs.microsoft.com/aspnet/core/)
 - Icons by [Bootstrap Icons](https://icons.getbootstrap.com/)
@@ -190,4 +190,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-? If you find this project useful, please consider giving it a star!
+ If you find this project useful, please consider giving it a star!
