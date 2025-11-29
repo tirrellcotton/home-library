@@ -3,47 +3,103 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - HomeLibrary.Web.Mvc</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <title>@ViewData["Title"] - Home Library</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/HomeLibrary.Web.Mvc.styles.css" asp-append-version="true"/>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HomeLibrary.Web.Mvc</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                </ul>
-            </div>
+    <header class="app-header">
+        <button class="app-header__menu-btn" id="menuBtn" aria-label="Open menu">
+            <i class="bi bi-list"></i>
+        </button>
+        <a asp-controller="Home" asp-action="Index" class="app-header__title">
+            <i class="bi bi-book-fill app-header__logo"></i>
+            <span class="app-header__text">Home Library</span>
+        </a>
+        <button class="app-header__more-btn" id="moreBtn" aria-label="More options">
+            <i class="bi bi-three-dots-vertical"></i>
+        </button>
+        
+        <div class="dropdown-menu" id="dropdownMenu">
+            <ul class="dropdown-menu__list">
+                <li class="dropdown-menu__item">
+                    <a asp-area="" asp-controller="Library" asp-action="Index" class="dropdown-menu__link">
+                        <i class="bi bi-journal-bookmark"></i>
+                        <span>My Library</span>
+                    </a>
+                </li>
+                <li class="dropdown-menu__item">
+                    <a asp-area="" asp-controller="Wishlist" asp-action="Index" class="dropdown-menu__link">
+                        <i class="bi bi-heart"></i>
+                        <span>My Wishlist</span>
+                    </a>
+                </li>
+                <li class="dropdown-menu__item">
+                    <a asp-area="" asp-controller="AddBook" asp-action="Index" class="dropdown-menu__link">
+                        <i class="bi bi-plus-circle"></i>
+                        <span>Add Book</span>
+                    </a>
+                </li>
+                <li class="dropdown-menu__item">
+                    <a href="#" class="dropdown-menu__link">
+                        <i class="bi bi-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
-</header>
-<div class="container">
-    <main role="main" class="pb-3">
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    
+    <aside class="side-menu" id="sideMenu">
+        <div class="side-menu__header">
+            <h2 class="side-menu__title">Menu</h2>
+            <button class="side-menu__close-btn" id="closeMenuBtn" aria-label="Close menu">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <nav>
+            <ul class="side-menu__list">
+                <li class="side-menu__item">
+                    <a asp-area="" asp-controller="Library" asp-action="Index" class="side-menu__link">
+                        <i class="bi bi-journal-bookmark"></i>
+                        <span>My Library</span>
+                    </a>
+                </li>
+                <li class="side-menu__item">
+                    <a asp-area="" asp-controller="Wishlist" asp-action="Index" class="side-menu__link">
+                        <i class="bi bi-heart"></i>
+                        <span>My Wishlist</span>
+                    </a>
+                </li>
+                <li class="side-menu__item">
+                    <a asp-area="" asp-controller="AddBook" asp-action="Index" class="side-menu__link">
+                        <i class="bi bi-plus-circle"></i>
+                        <span>Add Book</span>
+                    </a>
+                </li>
+                <li class="side-menu__item">
+                    <a href="#" class="side-menu__link">
+                        <i class="bi bi-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main role="main">
         @RenderBody()
     </main>
-</div>
 
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2025 - HomeLibrary.Web.Mvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </div>
-</footer>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+    <footer class="app-footer">
+        <div>
+            &copy; 2025 - Home Library
+        </div>
+    </footer>
+
+    <script type="module" src="~/js/dashboard.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

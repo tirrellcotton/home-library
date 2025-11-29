@@ -1,0 +1,101 @@
+@model HomeLibrary.Web.Mvc.Models.WishlistViewModel
+@{
+    ViewData["Title"] = "My Wishlist";
+}
+
+<div class="container">
+    <!-- Page Title -->
+    <section class="page-header">
+        <h1 class="page-header__title">My Wishlist</h1>
+    </section>
+
+    <!-- Search Bar -->
+    <section class="wishlist-filters">
+        <form method="get" asp-controller="Wishlist" asp-action="Index" class="filter-form">
+            <div class="search-bar">
+                <button type="button" class="search-bar__icon" aria-label="Search">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input 
+                    type="text" 
+                    name="searchTerm" 
+                    value="@Model.SearchTerm" 
+                    placeholder="Search Books" 
+                    class="search-bar__input"
+                    aria-label="Search wishlist books by title" />
+                <button type="button" class="search-bar__voice-icon" aria-label="Voice search">
+                    <i class="bi bi-mic-fill"></i>
+                </button>
+            </div>
+
+            <!-- Hidden submit button for accessibility -->
+            <button type="submit" class="hidden" aria-label="Apply search">Apply</button>
+        </form>
+    </section>
+
+    <!-- Book Grid -->
+    <section class="book-grid">
+        @if (Model.Books.Any())
+        {
+            @foreach (var book in Model.Books)
+            {
+                <div class="book-card" data-book-id="@book.Id">
+                    <div class="book-card__image">
+                        @if (!string.IsNullOrEmpty(book.CoverImageUrl))
+                        {
+                            <img src="@book.CoverImageUrl" alt="@book.Title cover" class="book-card__cover" />
+                        }
+                        else
+                        {
+                            <div class="book-card__placeholder">
+                                <i class="bi bi-book book-card__placeholder-icon"></i>
+                            </div>
+                        }
+                    </div>
+                    <div class="book-card__info">
+                        <h3 class="book-card__title">@book.Title</h3>
+                        @if (!string.IsNullOrEmpty(book.Author))
+                        {
+                            <p class="book-card__author">
+                                <i class="bi bi-person"></i>
+                                <span>@book.Author</span>
+                            </p>
+                        }
+                        <p class="book-card__genre">
+                            <i class="bi bi-tag"></i>
+                            <span>@book.Genre</span>
+                        </p>
+                    </div>
+                    <div class="book-card__actions">
+                        <a asp-controller="AddBook" asp-action="Edit" asp-route-id="@book.Id" class="book-card__edit-btn" title="Edit book" onclick="event.stopPropagation();">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-state">
+                <i class="bi bi-heart empty-state__icon"></i>
+                <p class="empty-state__message">Your wishlist is empty.</p>
+                <p class="empty-state__hint">Start adding books you'd like to read!</p>
+            </div>
+        }
+    </section>
+
+    <!-- Add Book Button -->
+    <section class="wishlist-actions">
+        <a asp-controller="AddBook" asp-action="Index" class="btn btn-primary btn-add-book">
+            <i class="bi bi-plus-circle"></i>
+            <span>Add Book to Wishlist</span>
+        </a>
+    </section>
+</div>
+
+<!-- Book Details Modal -->
+<partial name="_BookDetailsModal" />
+
+@section Scripts {
+    <script type="module" src="~/js/wishlist.js" asp-append-version="true"></script>
+}

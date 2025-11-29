@@ -1,21 +1,26 @@
 using System.Diagnostics;
+using HomeLibrary.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using HomeLibrary.Web.Mvc.Models;
 
 namespace HomeLibrary.Web.Mvc.Controllers;
 
-public class HomeController : Controller
+public class HomeController(ILogger<HomeController> logger, 
+    IGenreManager genreManager,
+    IAuthorManager authorManager,
+    IBookManager bookManager) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<HomeController> _logger = logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public async Task<IActionResult> Index()
     {
-        _logger = logger;
-    }
-
-    public IActionResult Index()
-    {
-        return View();
+        var viewModel = new HomeViewModel
+        {
+            TotalBooksOwned = await bookManager.GetOwnedBookCountAsync(),
+            TotalWishlist = await bookManager.GetWishlistBookCountAsync()
+        };
+        
+        return View(viewModel);
     }
 
     public IActionResult Privacy()

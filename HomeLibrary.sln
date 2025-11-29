@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11222.15 d18.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLibrary.Core", "HomeLibrary.Core\HomeLibrary.Core.csproj", "{1EACE18F-DEE8-460B-B7A8-83CF198678A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLibrary.DataAccess", "HomeLibrary.DataAccess\HomeLibrary.DataAccess.csproj", "{63D26098-8B09-4395-84EE-3EC497490376}"
@@ -7,6 +10,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLibrary.BusinessLogic", "HomeLibrary.BusinessLogic\HomeLibrary.BusinessLogic.csproj", "{B21BC821-5E64-42B3-BEEF-1E6357F8C21F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLibrary.Web.Mvc", "HomeLibrary.Web.Mvc\HomeLibrary.Web.Mvc.csproj", "{9F2D9CDE-138B-4182-8020-69B84B5BB2CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLibrary.BusinessLogic.Tests", "HomeLibrary.BusinessLogic.Tests\HomeLibrary.BusinessLogic.Tests.csproj", "{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4BF3B0E5-D03A-44EE-BFC6-E6DEBBF203DC}"
+	ProjectSection(SolutionItems) = preProject
+		Sketches\Home (Dashboard) - Mobile.png = Sketches\Home (Dashboard) - Mobile.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +40,15 @@ Global
 		{9F2D9CDE-138B-4182-8020-69B84B5BB2CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F2D9CDE-138B-4182-8020-69B84B5BB2CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F2D9CDE-138B-4182-8020-69B84B5BB2CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB8AD9B-F50D-41FA-801A-76DFAA0D7B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9DA7AFA-F7F2-4E91-8D4B-76799D0CBD52}
 	EndGlobalSection
 EndGlobal
