@@ -1,0 +1,58 @@
+<!-- Book Details Modal -->
+<div class="modal" id="bookDetailsModal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose" aria-label="Close modal">
+            <i class="bi bi-x-circle-fill"></i>
+        </button>
+
+        <!-- Book Cover -->
+        <div class="modal-cover">
+            <div class="modal-cover__placeholder" id="modalCover">
+                <i class="bi bi-book"></i>
+            </div>
+        </div>
+
+        <!-- Book Details -->
+        <div class="modal-details">
+            <h2 class="modal-details__title" id="modalTitle">Book Title</h2>
+
+            <div class="modal-details__item" id="modalAuthorContainer">
+                <span class="modal-details__label">Author:</span>
+                <span class="modal-details__value" id="modalAuthor"></span>
+            </div>
+
+            <div class="modal-details__item" id="modalGenreContainer">
+                <span class="modal-details__label">Genre:</span>
+                <span class="modal-details__value" id="modalGenre"></span>
+            </div>
+
+            <div class="modal-details__item" id="modalPublisherContainer">
+                <span class="modal-details__label">Publisher:</span>
+                <span class="modal-details__value" id="modalPublisher"></span>
+            </div>
+
+            <div class="modal-details__item" id="modalYearContainer">
+                <span class="modal-details__label">Published:</span>
+                <span class="modal-details__value" id="modalYear"></span>
+            </div>
+
+            <div class="modal-details__item" id="modalIsbnContainer">
+                <span class="modal-details__label">ISBN:</span>
+                <span class="modal-details__value" id="modalIsbn"></span>
+            </div>
+
+            <div class="modal-details__notes" id="modalNotesContainer">
+                <p class="modal-details__notes-text" id="modalNotes"></p>
+            </div>
+        </div>
+
+        <!-- Edit Button -->
+        <div class="modal-actions">
+            <a href="#" class="btn btn-primary modal-edit-btn" id="modalEditBtn">
+                <i class="bi bi-pencil"></i>
+                <span>Edit Book</span>
+            </a>
+        </div>
+    </div>
+</div>
