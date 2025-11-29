@@ -1,6 +1,16 @@
-# Ignore all .css files in wwwroot/css
-wwwroot/css/*.css
+# Ignore minified CSS files
 wwwroot/css/minified/*.css
 
 # Ignore all files in wwwroot/lib
 wwwroot/lib/**
+
+# Note: We DO track the following CSS files:
+# - site.css (main entry point)
+# - variables.css (design tokens)
+# - base.css (reset and base styles)
+# - layout.css (container and structure)
+# - header.css (navigation components)
+# - buttons.css (button components)
+# - cards.css (card components)
+# - forms.css (form components)
+# - utilities.css (utility classes)
